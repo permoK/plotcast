@@ -1,0 +1,17 @@
+version: '3'  # Note: '3.12' is not a valid version, using '3'
+
+services:
+  plotcast:
+    volumes:
+      - static:/staticfiles  # Fixed the volume syntax
+    env_file:
+      - .env
+    build:
+      context: .
+    ports:
+      - "8100:8100"
+
+    restart: unless-stopped
+
+volumes:
+  static:
