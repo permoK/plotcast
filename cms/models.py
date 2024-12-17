@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from django.contrib.postgres.fields import ArrayField
+from django.db.models.functions import TruncHour
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -19,7 +20,7 @@ class PDFDocument(models.Model):
     description = models.TextField(blank=True)
     long_description = models.TextField(blank=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='documents')
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='uploaded_documents', default='ADMIN')
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='uploaded_documents', blank=True, null=True)
     youtube = models.URLField(blank=True, null=True)  # Add field for YouTube link
     spotify = models.URLField(blank=True, null=True)  # Add field for Spotify link
     # tags = ArrayField(
